@@ -1,0 +1,37 @@
+<h2 class="text-center">Login</h2>
+
+<form novalidate (ngSubmit)="signIn()" [formGroup]="login" class="row justify-content-md-center">
+  <div class="col-md-6">
+    <div class="form-control-row">
+      <label for="example-email-input" class="col-md-4 col-form-label">Email:</label>
+      <div class="col-md-12">
+        <input type="text" class="form-control" id="example-email-input" formControlName="email">
+      </div>
+    </div>
+    <div class="col-md-12 alert alert-danger" role="alert"
+         *ngIf="login.get('email')?.errors?.required && login.get('email')?.touched">
+      Email is required!
+    </div>
+
+    <div class="form-control-row">
+      <label for="example-password-input" class="col-md-4 col-form-label">Password:</label>
+      <div class="col-md-12">
+        <input type="password" class="form-control" id="example-password-input" formControlName="password">
+      </div>
+    </div>
+    <div class="col-md-12 alert alert-danger" role="alert"
+         *ngIf="login.get('password').invalid && login.get('password')?.touched">
+      <div *ngIf="login.get('password')?.errors?.required">
+        Password is required!
+      </div>
+      <div *ngIf="login.get('password').errors?.minlength">
+        <p>Password must be at least 6 character</p>
+      </div>
+
+    </div>
+    <div class="col-md-12 text-center">
+      <button type="submit" class="btn btn-primary m-3">Submit</button>
+      <button (click)="clear()" class="btn btn-danger m-3">Reset</button>
+    </div>
+  </div>
+</form>
