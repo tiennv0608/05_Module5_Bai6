@@ -1,0 +1,141 @@
+<h2 class="text-center">Register</h2>
+
+<form novalidate (ngSubmit)="submit()" [formGroup]="register" class="row justify-content-md-center">
+  <div class="col-md-6">
+    <div class="form-control-row">
+      <label for="example-email-input" class="col-md-4 col-form-label">Email:</label>
+      <div class="col-md-12">
+        <input type="text" class="form-control" id="example-email-input" formControlName="email">
+      </div>
+    </div>
+    <div class="col-md-12 alert alert-danger" role="alert"
+         *ngIf="register.get('email')?.errors?.required && register.get('email')?.touched">
+      Email is required!
+    </div>
+
+    <div class="form-control-row">
+      <label for="example-password-input" class="col-md-4 col-form-label">Password:</label>
+      <div class="col-md-12">
+        <input type="password" class="form-control" id="example-password-input" formControlName="password">
+      </div>
+    </div>
+    <div class="col-md-12 alert alert-danger" role="alert"
+         *ngIf="register.get('password').invalid && register.get('password')?.touched">
+      <div *ngIf="register.get('password')?.errors?.required">
+        Password is required!
+      </div>
+      <div *ngIf="register.get('password').errors?.minlength">
+        <p>Password must be at least 6 character</p>
+      </div>
+
+    </div>
+
+
+    <div class="form-control-row">
+      <label for="example-confirm-input" class="col-md-4 col-form-label">Confirm Password:</label>
+      <div class="col-md-12">
+        <input type="password" class="form-control" id="example-confirm-input" formControlName="confirmPassword">
+      </div>
+    </div>
+    <div class="col-md-12 alert alert-danger" role="alert"
+         *ngIf="register.get('confirmPassword').invalid && register.get('confirmPassword')?.touched">
+      <div *ngIf="register.get('confirmPassword')?.errors?.required">
+        Confirm password is required!
+      </div>
+<!--      <div *ngIf="register.hasError('notSame')">-->
+<!--        Password does not match!-->
+<!--      </div>-->
+    </div>
+
+
+    <div class="form-control-row">
+      <label class="col-md-4 col-form-label">Country:</label>
+      <div class="col-md-12">
+        <select class="form-control" formControlName="country">
+          <option value="Vietnam">Việt Nam</option>
+          <option value="China">Trung Quốc</option>
+          <option value="Japan">Nhật Bản</option>
+          <option value="Thailand">Thái Lan</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-control-row">
+      <label for="example-age-input" class="col-md-4 col-form-label">Age:</label>
+      <div class="col-md-12">
+        <input type="number" class="form-control" id="example-age-input" formControlName="age">
+      </div>
+    </div>
+    <div class="col-md-12 alert alert-danger" role="alert"
+         *ngIf="register.get('age')?.errors?.required && register.get('age')?.touched">
+      Age is required!
+    </div>
+    <div class="col-md-12 alert alert-danger" role="alert"
+         *ngIf="register.get('age')?.errors?.min">
+      Age must be over 18!
+    </div>
+
+    <div class="form-control-row">
+      <label class="col-md-4 col-form-label">Gender:</label>
+      <div class="col-md-12">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="gender" id="male" value="male">
+          <label class="form-check-label" for="male">
+            Nam
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="gender" id="female" value="female">
+          <label class="form-check-label" for="female">
+            Nữ
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-control-row">
+      <label for="example-phone-input" class="col-md-4 col-form-label">Phone:</label>
+      <div class="col-md-12">
+        <input type="text" class="form-control" id="example-phone-input" formControlName="phone">
+      </div>
+    </div>
+    <div class="col-md-12 alert alert-danger" role="alert"
+         *ngIf="register.get('phone')?.errors?.required && register.get('phone')?.touched">
+      Phone is required!
+    </div>
+    <div class="col-md-12 alert alert-danger" role="alert"
+         *ngIf="register.get('phone')?.errors?.pattern">
+      Phone must begin with +84 and 9-10 numbers
+    </div>
+    <div class="form-control-row">
+      <div class="col-md-12 text-center">
+        <button type="submit" class="btn btn-primary m-3">Submit</button>
+        <button (click)="clear()" class="btn btn-danger m-3">Reset</button>
+      </div>
+    </div>
+  </div>
+</form>
+<hr>
+<h2>Detail</h2>
+<table>
+  <tr>
+    <td>Email:</td>
+    <td>{{register.get('email').value}}</td>
+  </tr>
+  <tr>
+    <td>Country:</td>
+    <td>{{register.get('country').value}}</td>
+  </tr>
+  <tr>
+    <td>Age:</td>
+    <td>{{register.get('age').value}}</td>
+  </tr>
+  <tr>
+    <td>Gender:</td>
+    <td>{{register.get('gender').value}}</td>
+  </tr>
+  <tr>
+    <td>Phone:</td>
+    <td>{{register.get('phone').value}}</td>
+  </tr>
+</table>
