@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
       gender: new FormControl('', Validators.required),
       phone: new FormControl('', [Validators.required, Validators.pattern('^\\+84\\d{9,10}$')]),
       password: new FormControl('', [Validators.minLength(6), Validators.required]),
-      confirmPassword: new FormControl('', [Validators.required]),
+      confirmPassword: new FormControl('', [Validators.minLength(6), Validators.required]),
       // }, {validators: this.confirmPass.bind(this)});
     });
   }
@@ -46,10 +46,13 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  // confirmPass() {
-  //   const {value: password} = this.register.get('password');
-  //   const {value: confirmPassword} = this.register.get('confirmPassword');
-  //   return password === confirmPassword ? null : { notSame: true };
-  // }
+  confirmPass(): boolean {
+    let password = this.register.get('password').value;
+    let confirmPassword = this.register.get('confirmPassword').value;
+    if (password === confirmPassword) {
+      return false;
+    }
+    return true;
+  }
 
 }

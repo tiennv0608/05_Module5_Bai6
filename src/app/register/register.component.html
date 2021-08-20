@@ -42,9 +42,10 @@
       <div *ngIf="register.get('confirmPassword')?.errors?.required">
         Confirm password is required!
       </div>
-<!--      <div *ngIf="register.hasError('notSame')">-->
-<!--        Password does not match!-->
-<!--      </div>-->
+    </div>
+    <div class="col-md-12 alert alert-danger" role="alert"
+      *ngIf="register.value.password != register.value.confirmPassword">
+      Password does not match!
     </div>
 
 
