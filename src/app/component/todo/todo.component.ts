@@ -49,7 +49,7 @@ export class TodoComponent implements OnInit {
     this.todoService.create(todo).subscribe(() => {
       this.todoForm.reset();
       alert('Tạo thành công');
-      window.location.reload();
+      this.getAll();
     }, e => {
       console.log(e);
     });
@@ -71,12 +71,11 @@ export class TodoComponent implements OnInit {
       content: this.todoFormEdit.value.contentEdit,
       complete: this.todoFormEdit.value.completeEdit,
     };
-    console.log(todo);
-    console.log(id);
     this.todoService.update(id, todo).subscribe(() => {
       console.log('Cập nhật thành công');
       this.todoFormEdit.reset();
-      window.location.reload();
+      this.check = -1;
+      this.getAll();
     }, error => {
       console.log(error);
     });
@@ -95,15 +94,13 @@ export class TodoComponent implements OnInit {
   delete(id: number) {
     this.todoService.delete(id).subscribe(() => {
       console.log('Xóa thành công');
-      this.router.navigate(['todos']).then(() => {
-        window.location.reload();
-      });
+      this.getAll();
+      this.check = -1;
     });
   }
 
   abort() {
-    this.router.navigate(['todos']).then(() => {
-      window.location.reload();
-    });
+    this.check = -1;
+    this.getAll();
   }
 }
