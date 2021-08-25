@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
-import {User} from '../user';
+import {User} from '../../model/user';
 import {ParsedProperty} from '@angular/compiler';
 
 @Component({

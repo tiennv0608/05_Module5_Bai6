@@ -1,0 +1,5 @@
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <span *ngIf="message">{{message}}</span>
+  <button class="btn btn-danger" (click)="delete(id)">Yes</button>
+  <button class="btn btn-warning" (click)="abort()">No</button>
+</div>

@@ -1,0 +1,20 @@
+<h2 class="text-center">
+  Todo App
+</h2>
+
+<div class="col-md-8 offset-md-2">
+  <div class="d-grid gap-2 d-md-flex">
+    <form class="form-control" [formGroup]="todoForm" (ngSubmit)="submit()">
+      <input type="text" class="form-control" formControlName="content">
+      <button class="btn btn-primary me-md-2">Create</button>
+    </form>
+  </div>
+  <ul>
+    <div class="d-grid gap-2 d-md-flex mt-2" *ngFor="let todo of todos; index as i">
+      <li class="form-control me-md-2" (click)="toggleTodo(i)" [class.complete]="todo.complete">{{todo.content}}</li>
+      <a class="btn btn-success me-md-2" [routerLink]="['edit', todo.id]">Edit</a>
+      <a class="btn btn-danger me-md-2" [routerLink]="['delete', todo.id]">Delete</a>
+    </div>
+    <router-outlet></router-outlet>
+  </ul>
+</div>
