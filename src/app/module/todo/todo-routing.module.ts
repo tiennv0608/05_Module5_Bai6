@@ -7,15 +7,15 @@ import {TodoDeleteComponent} from '../../component/todo-delete/todo-delete.compo
 
 const routes: Routes = [{
   path: '',
-  component: TodoComponent
-}, {
-  path: 'edit/:id',
-  component: TodoEditComponent
-}, {
-  path: 'delete/:id',
-  component: TodoDeleteComponent
-}
-];
+  component: TodoComponent,
+  children: [{
+    path: 'edit/:id',
+    component: TodoEditComponent
+  }, {
+    path: 'delete/:id',
+    component: TodoDeleteComponent
+  }]
+}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

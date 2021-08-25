@@ -16,7 +16,12 @@ export class TodoComponent implements OnInit {
   todoForm: FormGroup = new FormGroup({
     content: new FormControl()
   });
+  todoFormEdit: FormGroup = new FormGroup({
+    contentEdit: new FormControl(),
+    complete: new FormControl()
+  });
   message: string;
+  check: number;
 
 
   constructor(private todoService: TodoService,
@@ -46,6 +51,33 @@ export class TodoComponent implements OnInit {
       alert('Tạo thành công');
     }, e => {
       console.log(e);
+    });
+  }
+
+  findById(id: number, i: number) {
+    this.check = i;
+    return this.todoService.findById(id).subscribe(todo => {
+      this.todoFormEdit = new FormGroup({
+        contentEdit: new FormControl(todo.content),
+        completeEdit: new FormControl(false)
+      });
+    });
+  }
+
+  edit(id: number) {
+    const todo = {
+      id: id,
+      content: this.todoFormEdit.value.contentEdit,
+      complete: this.todoFormEdit.value.completeEdit,
+    }
+    console.log(todo);
+    console.log(id);
+    this.todoService.update(id, todo).subscribe(() => {
+      console.log('Cập nhật thành công');
+      this.todoFormEdit.reset();
+      window.location.reload();
+    }, error => {
+      console.log(error);
     });
   }
 
