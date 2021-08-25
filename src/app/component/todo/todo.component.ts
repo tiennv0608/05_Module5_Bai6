@@ -22,7 +22,7 @@ export class TodoComponent implements OnInit {
   });
   message: string;
   check: number;
-
+  todo: Todo = {};
 
   constructor(private todoService: TodoService,
               private activatedRoute: ActivatedRoute,
@@ -49,6 +49,7 @@ export class TodoComponent implements OnInit {
     this.todoService.create(todo).subscribe(() => {
       this.todoForm.reset();
       alert('Tạo thành công');
+      window.location.reload();
     }, e => {
       console.log(e);
     });
@@ -69,7 +70,7 @@ export class TodoComponent implements OnInit {
       id: id,
       content: this.todoFormEdit.value.contentEdit,
       complete: this.todoFormEdit.value.completeEdit,
-    }
+    };
     console.log(todo);
     console.log(id);
     this.todoService.update(id, todo).subscribe(() => {
@@ -81,4 +82,28 @@ export class TodoComponent implements OnInit {
     });
   }
 
+  confirm(id: number, i: number) {
+    this.todoService.findById(id).subscribe(data => {
+      this.todo = data;
+      this.check = i;
+      this.message = 'Bạn có muốn xóa ' + this.todo.content + ' không?';
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  delete(id: number) {
+    this.todoService.delete(id).subscribe(() => {
+      console.log('Xóa thành công');
+      this.router.navigate(['todos']).then(() => {
+        window.location.reload();
+      });
+    });
+  }
+
+  abort() {
+    this.router.navigate(['todos']).then(() => {
+      window.location.reload();
+    });
+  }
 }

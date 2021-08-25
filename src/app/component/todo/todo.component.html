@@ -13,21 +13,25 @@
     <div class="col-10">
       <li class="list-group-item" [class.complete]="todo.complete" (click)="toggleTodo(i)">{{todo.content}}</li>
     </div>
-<!--    <div class="col-1">-->
-<!--      <a class="btn btn-success" [routerLink]="['edit', todo.id]">Edit</a>-->
-<!--    </div>-->
     <div class="col-1">
       <a class="btn btn-success" (click)="findById(todo.id, i)">Edit</a>
     </div>
     <div class="col-1">
-      <a class="btn btn-danger" [routerLink]="['delete', todo.id]">Delete</a>
+      <a class="btn btn-danger" (click)="confirm(todo.id, i)">Delete</a>
     </div>
-    <div *ngIf="check == i">
+    <div *ngIf="check == i && !message">
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <form class="form-control" [formGroup]="todoFormEdit" (ngSubmit)="edit(todo.id)">
           <input type="text" class="form-control" formControlName="contentEdit">
           <button class="btn btn-primary me-md-2">Update</button>
         </form>
+      </div>
+    </div>
+    <div *ngIf="message && (check == i)">
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <span class="form-control">{{message}}</span>
+        <button class="btn btn-danger me-md-2" (click)="delete(todo.id)">Yes</button>
+        <button class="btn btn-primary me-md-2" (click)="abort()">No</button>
       </div>
     </div>
   </div>
