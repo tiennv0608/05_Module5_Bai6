@@ -9,12 +9,16 @@
       <button class="btn btn-primary me-md-2">Create</button>
     </form>
   </div>
-  <ul>
-    <div class="d-grid gap-2 d-md-flex mt-2" *ngFor="let todo of todos; index as i">
-      <li class="form-control me-md-2" (click)="toggleTodo(i)" [class.complete]="todo.complete">{{todo.content}}</li>
-      <a class="btn btn-success me-md-2" [routerLink]="['edit', todo.id]">Edit</a>
-      <a class="btn btn-danger me-md-2" [routerLink]="['delete', todo.id]">Delete</a>
+  <div class="row mt-2" *ngFor="let todo of todos; index as i">
+    <div class="col-10">
+      <li class="list-group-item" [class.complete]="todo.complete" (click)="toggleTodo(i)">{{todo.content}}</li>
+    </div>
+    <div class="col-1">
+      <a class="btn btn-success" [routerLink]="['edit', todo.id]">Edit</a>
+    </div>
+    <div class="col-1">
+      <a class="btn btn-danger" [routerLink]="['delete', todo.id]">Delete</a>
     </div>
     <router-outlet></router-outlet>
-  </ul>
+  </div>
 </div>

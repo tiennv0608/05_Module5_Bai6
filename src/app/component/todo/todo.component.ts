@@ -2,7 +2,7 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Todo} from '../../model/todo';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {TodoService} from '../../service/todo.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 let _id = 1;
 
@@ -19,7 +19,9 @@ export class TodoComponent implements OnInit {
   message: string;
 
 
-  constructor(private todoService: TodoService) {
+  constructor(private todoService: TodoService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {

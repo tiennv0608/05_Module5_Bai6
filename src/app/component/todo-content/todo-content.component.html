@@ -1,0 +1,5 @@
+<li class="list-group-item me-md-10" [class.complete]="todo.complete">{{todo.content}}</li>
+<a class="btn btn-success me-md-1" [routerLink]="['edit', todo.id]">Edit</a>
+<a class="btn btn-danger me-md-1" [routerLink]="['delete', todo.id]">Delete</a>
+<router-outlet></router-outlet>
+
